@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load time %}
+
+{% block content %}
+<div id="body" class="container">
+    <div class="text-center hidden-lg" style="font-size:32px;color:cadetblue;margin-top:20px;">票务解决方案</div>
+      <div class="container">
+            <div class="row clearfix">
+                  <div class="col-md-12 column" style="margin-top:10px;">
+                        <form id="choose_form" name="choose" method="post" action="" onsubmit="javascript:return confirm('请确保信息正确, 牢记防盗票暗号, 以暗号为准校验!\n是否确认购票(购票后请15分钟内付款)');">
+                              <div class="dropdown">
+                                    <button type="button" class="btn dropdown-toggle" id="choose_car" data-toggle="dropdown" style="width:100%;">车辆选择<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="choose" style="width:100%">
+                                        {% for i in cardata.data %}
+                                        <li role="presentation">
+                                            {% if i.fields.route_mid %}
+                                            <div role="menuitem" tabindex="-1" class="choose_car" data-carid="{{ i.pk }}">车牌信息：{{ i.fields.car_id }} | 路线：{{ i.fields.route_left }}-{{ i.fields.route_mid }}-{{ i.fields.route_right }} | 发车时间：{{ i.fields.start_time|timetostr }} | 余座：<lable class="shownumber">{{ i.fields.seat_number }}</lable> | 车票价格：{{ i.fields.price }}元</div>
+                                          {% else %}
+                                            <div role="menuitem" tabindex="-1" class="choose_car" data-carid="{{ i.pk }}">车牌信息：{{ i.fields.car_id }} | 路线：{{ i.fields.route_left }}-{{ i.fields.route_right }} | 发车时间：{{ i.fields.start_time|timetostr }} | 余座：<lable class="shownumber">{{ i.fields.seat_number }}</lable> | 车票价格：{{ i.fields.price }}元</div>
+                                          {% endif %}
+                                        </li>
+                                        <li role="presentation" class="divider"></li>
+                                        {% endfor %}
+                                    </ul>
+                              </div>
+                              <br/>
+                              <div class="form-group">
+                                    <label for="inputName" class="col-sm-2 control-label" style="font-size:16px;margin-top:5px;">乘车人姓名：</label>
+                                   <div class="col-sm-10">
+                                         <input type="text" class="form-control" id="inputName" name="user_name"/>
+                                   </div>
+                             </div>
+                             <br class="visible-lg"/><br class="visible-lg"/>
+                             <div class="form-group">
+                                    <label for="inputPhone" class="col-sm-2 control-label" style="font-size:16px;margin-top:5px;">乘车人电话：</label>
+                                   <div class="col-sm-10">
+                                         <input type="number" class="form-control" id="inputPhone" name="user_phone" />
+                                   </div>
+                             </div><br class="visible-lg"/><br class="visible-lg"/>
+                             <div class="form-group">
+                                    <label for="inputKey" class="col-sm-2 control-label" style="font-size:16px;margin-top:5px;">防盗票暗号：</label>
+                                    <div class="col-sm-10">
+                                          <input type="text" class="form-control" id="inputKey" name="user_key" />
+                                    </div>
+                              </div>
+                            <input type="hidden" name="car_id" id="carid">
+                            {% csrf_token %}
+                            <br class="visible-lg"/><br class="visible-lg"/>
+                              <div class="form-group">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                                <th  style="height:30px;"></th>
+                                          </tr>
+                                          <tr>
+                                                <td align="center"><input type="submit" class="btn btn-info" value="订购车票"></td>
+                                          </tr>
+                                    </table>
+                             </div>
+                              
+                        </form>
+                  </div>
+            </div>
+      </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+$(".choose_car").click(function(){
+    $("#choose_car").html($(this).html()+'<span class="caret"></span>');
+    $("#carid").val(this.getAttribute("data-carid"));
+});
+</script>
+{% if returnmsg %}
+<script>
+    alert('{{returnmsg}}');
+</script>
+{% endif %}
+{% endblock %}

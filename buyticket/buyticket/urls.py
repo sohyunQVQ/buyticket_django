@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from usermain import views as main_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('',main_views.index, name="index"),
+    path('choose/', main_views.choose, name="choose"),
+    path('select/', main_views.select, name="select"),
+    path('query/', main_views.query, name="query"),
+    path('api', main_views.api, name="api"),
+    path('pay', main_views.pay, name="pay"),
+
 ]

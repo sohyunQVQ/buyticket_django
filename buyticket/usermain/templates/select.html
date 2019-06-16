@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load time %}
+
+{% block content %}
+<div id="body" class="container">
+      <div class="text-center hidden-lg" style="font-size:32px;color:cadetblue;margin-top:20px;">票务解决方案</div>
+      <div class="container">
+            <div class="row clearfix">
+                  <div class="col-md-12 column" style="margin-top:10px;">
+                        <table class="table table-condensed">
+                              <caption>当前有<lable class="shownumber">{{ cardata.data | length }}辆</lable>待发车的车辆</caption>
+                              <thead>
+                                    <tr>
+                                          <th>车牌号</th>
+                                          <th>路线</th>
+                                          <th>发车时间</th>
+                                          <th>余座</th>
+                                          <th>价格</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                              {% for i in cardata.data %}
+                                    <tr>
+                                          <td>{{ i.fields.car_id }}</td>
+                                          {% if i.fields.route_mid %}
+                                          <td>{{ i.fields.route_left }}-{{ i.fields.route_mid }}-{{ i.fields.route_right }}</td>
+                                          {% else %}
+                                          <td>{{ i.fields.route_left }}-{{ i.fields.route_right }}</td>
+                                          {% endif %}
+                                          <td>{{ i.fields.start_time|timetostr }}</td>
+                                          <td>{{ i.fields.seat_number }}</td>
+                                          <td>{{ i.fields.price }}/张</td>
+                                    </tr>
+                              {% endfor %}
+                              </tbody>
+                        </table>
+                  </div>
+            </div>
+      </div>
+</div>
+{% endblock %}

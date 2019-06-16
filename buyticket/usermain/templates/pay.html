@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="body" class="container">
+    <div class="text-center hidden-lg" style="font-size:32px;color:cadetblue;margin-top:20px;">票务解决方案</div>
+      <div class="container">
+            <div class="row clearfix">
+                  <div class="container">
+                    <div class="row clearfix" style="margin-top:50px">
+                        <div class="col-md-6 column">
+                            <ol>
+                                <li>
+                                    微信扫描二维码
+                                </li>
+                                <li>
+                                    输入正确金额(如果是50就输入50, 50.01就输入50.01)
+                                </li>
+                                <li>
+                                    备注您防盗暗号
+                                </li>
+                                <li>
+                                    支付后系统检测到会自动更新支付状态
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6 column">
+                            <img alt="个人收款二维码" src="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+</div>
+{% endblock %}

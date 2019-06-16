@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="body" class="container">
+            <div class="row clearfix">
+                  <div class="col-md-4 column">
+                  </div>
+                  <div class="col-md-4 column mid">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">       
+                              <tr>
+                                    <td  style="height:100px;"></td>
+                              </tr>
+                              <tr class="hidden-lg">
+                                    <td align="center" style="font-size:80%;color:cadetblue">票务解决方案</td>
+                              </tr>
+                              <tr>
+                                    <td align="center" style="font-size:60%">可视进度的票务管理方案</td>
+                              </tr>
+                              <tr>
+                                    <td  style="height:10px;"></td>
+                              </tr>
+                              <tr>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                                <td align="right"><a href="{% url 'choose' %}"pe="button" style="margin-right:3px;" class="btn btn-primary">购买车票</a></td>
+                                                <td><a type="button" href="{% url 'select' %}" style="margin-left:3px;" class="btn btn-info">实时车票</a></td>
+                                          </tr>
+                                    </table>
+                              </tr>
+                         </table>
+                        
+                  </div>
+                  <div class="col-md-4 column">
+                  </div>
+            </div>
+      </div>
+{% endblock %}
